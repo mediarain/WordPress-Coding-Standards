@@ -164,7 +164,10 @@ class WordPress_Sniffs_Arrays_ArrayDeclarationSniff implements PHP_CodeSniffer_S
                         $content = $tokens[($comma + 1)]['content'];
                         $error   = "Expected 1 space between comma and \"$content\"; 0 found";
                         $phpcsFile->addError($error, $comma, 'NoSpaceAfterComma');
-                    } else {
+                    } elseif (false === strpos($tokens[($comma + 1)]['content'], "\n")) {
+                      //RAM - Changed logic to use an elseif because WordPress standard is for
+                      //multivalued arrays to appear on multiple lines and this sniff was erroring
+                      //on that, as the indentation after the newline was more than 1 space.
                         $spaceLength = strlen($tokens[($comma + 1)]['content']);
                         if ($spaceLength !== 1) {
                             $content = $tokens[($comma + 2)]['content'];
