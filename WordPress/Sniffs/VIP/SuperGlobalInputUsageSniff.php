@@ -1,6 +1,6 @@
 <?php
 /**
- * Flag any usage of super global input var ( _GET / _POST / _REQUEST )
+ * Flag any usage of super global input var ( _GET / _POST / etc. )
  *
  * @category PHP
  * @package  PHP_CodeSniffer
@@ -39,15 +39,14 @@ class WordPress_Sniffs_VIP_SuperGlobalInputUsageSniff extends WordPress_Sniff
 		$tokens = $phpcsFile->getTokens();
 
 		// Check for global input variable
-		if ( ! in_array( $tokens[$stackPtr]['content'], array( '$_GET', '$_POST', '$_REQUEST' ) ) )
+		if ( ! in_array( $tokens[ $stackPtr ]['content'], WordPress_Sniff::$input_superglobals ) ) {
 			return;
+		}
 
 		$varName = $tokens[$stackPtr]['content'];
 
 		// If we're overriding a superglobal with an assignment, no need to test
-		$semicolon_position = $phpcsFile->findNext( array( T_SEMICOLON ), $stackPtr + 1, null, null, null, true );
-		$assignment_position = $phpcsFile->findNext( array( T_EQUAL ), $stackPtr + 1, null, null, null, true );
-		if ( $semicolon_position !== false && $assignment_position !== false && $assignment_position < $semicolon_position ) {
+		if ( $this->is_assignment( $stackPtr ) ) {
 			return;
 		}
 

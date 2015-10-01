@@ -4,13 +4,11 @@
 
 	<rule ref="WordPress-Core"/>
 
-	<!-- the following are inherited by other sniffs -->
-	<rule ref="WordPress.Arrays.ArrayAssignmentRestrictions"/>
-	<rule ref="WordPress.Functions.FunctionRestrictions"/>
-	<rule ref="WordPress.Variables.VariableRestrictions"/>
-
 	<rule ref="WordPress.VIP"/>
 
 	<rule ref="WordPress.XSS.EscapeOutput"/>
+	<rule ref="WordPress.CSRF.NonceVerification" />
+	<rule ref="WordPress.PHP.StrictComparisons" />
+	<rule ref="WordPress.WP.PreparedSQL" />
 
 </ruleset>

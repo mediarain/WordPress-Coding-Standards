@@ -6,7 +6,7 @@ while ( have_posts() ) {
 
 	// OK
 	?>
-	<a href="<?php the_permalink(); ?>" alt="<?php the_title_attribute(); ?>"><?php the_title(); ?></a>
+	<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a>
 	<?php
 
 	the_content(); // OK
@@ -16,7 +16,7 @@ while ( have_posts() ) {
 
 <h2><?php echo $title; // Bad ?></h2>
 <h2><?php echo esc_html( $title ); // OK ?></h2>
-<h2><?php echo apply_filters( 'the_title', $title ); // Bad, no sanitizing function ?></h2>
+<h2><?php echo apply_filters( 'the_title', $title ); // Bad, no escaping function ?></h2>
 
 <?php
 // issue:#53
@@ -50,9 +50,9 @@ echo filter_input( INPUT_GET, $bar, FILTER_SANITIZE_SPECIAL_CHARS );
 
 echo '<input type="checkbox" name="' . esc_attr( 'field[' . $id . ']' ) . '" value="on" ' . checked( $current, 'on', false ) . '> ';
 
-echo ent2ncr( $text );
+echo ent2ncr( $text ); // Bad
 
-echo number_format ( 1024 );
+echo number_format( 1024 );
 
 echo ent2ncr( esc_html( $_data ) );
 
@@ -150,3 +150,24 @@ echo vsprintf( 'Hello %s', array( esc_html( $foo ) ) ); // OK
 
 echo sprintf( __( 'Welcome to Genesis %s', 'genesis' ), PARENT_THEME_BRANCH ); // Bad x 2
 echo sprintf( esc_html__( 'Welcome to Genesis %s', 'genesis' ), esc_html( PARENT_THEME_BRANCH ) ); // OK
+
+echo esc_html( strval( $_var ) ? $_var : gettype( $_var ) ); // OK
+echo ( $is_hidden ) ? ' style="display:none;"' : ''; // OK
+echo sprintf( 'Howdy, %s', esc_html( $name ? $name : __( 'Partner' ) ) ); // OK
+
+_e( 'Something' ); // Bad
+esc_html_e( 'Something' ); // OK
+
+echo $something // Bad
+     . esc_attr( 'baz-' // Rest is OK
+	         . $r
+	         . ( $r === $active_round ? ' foo' : '' )
+	         . ( $r < $active_round ? ' bar' : '' )
+	) . 'something';
+
+echo implode( '<br>', $items ); // Bad
+echo implode( '<br>', urlencode_deep( $items ) ); // OK
+echo implode( '<br>', array_map( 'esc_html', $items ) ); // OK
+echo implode( '<br>', array_map( 'foo', $items ) ); // Bad
+echo join( '<br>', $items ); // Bad
+echo join( '<br>', array_map( 'esc_html', $items ) ); // OK
