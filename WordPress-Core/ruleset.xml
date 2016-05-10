@@ -9,6 +9,9 @@
 		<severity>0</severity>
 	</rule>
 
+	<!-- https://make.wordpress.org/core/handbook/best-practices/coding-standards/php/#use-elseif-not-else-if -->
+	<rule ref="PSR2.ControlStructures.ElseIfDeclaration"/>
+
 	<!-- http://make.wordpress.org/core/handbook/coding-standards/php/#remove-trailing-spaces -->
 	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
 
@@ -38,7 +41,7 @@
 	<rule ref="Squiz.Strings.DoubleQuoteUsage.ContainsVar">
 		<severity>0</severity>
 	</rule>
-	
+
 	<rule ref="Generic.PHP.LowerCaseKeyword"/>
 
 	<rule ref="Generic.Files.LineEndings">
@@ -55,6 +58,12 @@
 
 	<!-- https://make.wordpress.org/core/handbook/coding-standards/php/#space-usage -->
 	<rule ref="Generic.Formatting.SpaceAfterCast"/>
+	<rule ref="Squiz.Strings.ConcatenationSpacing">
+		<properties>
+			<property name="spacing" value="1"/>
+			<property name="ignoreNewlines" value="true"/>
+		</properties>
+	</rule>
 
 	<!-- https://make.wordpress.org/core/handbook/coding-standards/php/#brace-style -->
 	<rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>
@@ -85,11 +94,13 @@
 	</rule>
 	<rule ref="WordPress.Arrays.ArrayKeySpacingRestrictions"/>
 	<rule ref="WordPress.Classes.ValidClassName"/>
+	<rule ref="WordPress.NamingConventions.ValidVariableName"/>
 	<rule ref="WordPress.Files.FileName"/>
 	<rule ref="WordPress.NamingConventions.ValidFunctionName"/>
 	<rule ref="WordPress.WhiteSpace.ControlStructureSpacing"/>
 	<rule ref="WordPress.WhiteSpace.OperatorSpacing"/>
 	<rule ref="WordPress.WhiteSpace.CastStructureSpacing"/>
 	<rule ref="WordPress.PHP.YodaConditions"/>
+	<rule ref="WordPress.WP.I18n"/>
 
 </ruleset>
