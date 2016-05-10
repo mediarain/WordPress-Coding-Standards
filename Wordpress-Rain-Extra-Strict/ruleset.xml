@@ -9,4 +9,5 @@
 	<rule ref="WordPress-Strict-Linux"/>
 	<rule ref="WordPress-Extra"/>
 	<rule ref="WordPress-Docs"/>
+	<rule ref="WordPress-Strict-Windows"/>
 </ruleset>
