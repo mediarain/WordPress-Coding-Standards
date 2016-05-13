@@ -3,9 +3,10 @@
 	<description>Best practices beyond core WordPress Coding Standards</description>
 
 	<rule ref="WordPress-VIP">
+		<exclude name="WordPress.WP.I18n"/>
 		<exclude name="WordPress.VIP.AdminBarRemoval"/>
 	</rule>
-	
+
 	<rule ref="WordPress-Strict-Linux"/>
 	<rule ref="WordPress-Extra"/>
 	<rule ref="WordPress-Docs"/>
