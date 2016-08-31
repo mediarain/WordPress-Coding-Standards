@@ -5,6 +5,7 @@
 	<rule ref="WordPress-VIP">
 		<exclude name="WordPress.WP.I18n"/>
 		<exclude name="WordPress.VIP.AdminBarRemoval"/>
+		<exclude name="WordPress.VIP.RestrictedFunctions"/>
 	</rule>
 
 	<rule ref="WordPress-Strict-Linux"/>
